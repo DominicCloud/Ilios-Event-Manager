@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}About{% endblock title %}
+{% block body %}
+<div class="container mx-auto px-4 py-8">
+  <!-- Section 1 -->
+  <div class="flex flex-col md:flex-row mb-16">
+    <div class="md:w-1/2 mt-4 md:mt-0 mr-12">
+      <img src="{% static "stock/ourst.png" %}" alt="Our Story" class="w-full h-auto rounded-2xl">
+    </div>
+    <div class="md:w-1/2 md:pr-4">
+      <h2 class="text-2xl font-bold mb-2">Our Story</h2>
+      <p class="text-gray-700 leading-relaxed">At our core, we are a group of passionate individuals driven by the belief that technology can revolutionize the college event experience. 
+        Our journey began with a shared vision to simplify event navigation on campuses across the globe. Recognizing the complexities and frustrations students often face when trying 
+        to register for and navigate through various college events, we set out to develop a solution that would streamline the process and enhance the overall event experience. 
+        Thus, our software was born—a user-friendly application designed to empower students with the ability to register for events at the click of a button while providing event organizers 
+        with valuable analytics to optimize their offerings. </p>
+    </div>
+    
+  </div>
+  
+  <!-- Section 2 -->
+  <div class="flex flex-col md:flex-row mb-16">
+    <div class="md:w-1/2 md:pr-4">
+      <h2 class="text-2xl font-bold mb-2">Our Team</h2>
+      <p class="text-gray-700 leading-relaxed">Our team is comprised of diverse and talented individuals united by a common goal: 
+        to make a positive impact in the college community through innovative technology. 
+        From seasoned software engineers to creative designers and dedicated project managers, each member brings unique skills and perspectives to the table. Collaborating closely, 
+        we leverage our collective expertise to continuously enhance our software and ensure it meets the evolving needs of both students and event organizers. 
+        Together, we are committed to pushing boundaries, embracing challenges, and delivering exceptional results that exceed expectations.</p>
+    </div>
+    <div class="md:w-1/2 mt-4 md:mt-0 ml-12">
+      <img src="{% static "stock/team.png" %}" alt="Our Team" class="w-full h-auto">
+    </div>
+  </div>
+  
+  <!-- Section 3 -->
+  <div class="flex flex-col md:flex-row mb-8">
+    <div class="md:w-1/2 mt-4 md:mt-0 mr-12">
+      <img src="{% static "stock/values.png" %}" alt="Our Values" class="w-full h-auto">
+  </div>
+    
+    <div class="md:w-1/2 md:pr-4">
+      <h2 class="text-2xl font-bold mb-2">Our Values</h2>
+      <p class="text-gray-700 leading-relaxed">At the heart of our company are a set of values that guide everything we do. 
+        <b>Integrity</b>, <b>transparency</b>, and <b>accountability</b> are the cornerstones of our business practices, as we believe in conducting
+         ourselves with honesty and ethical responsibility at all times. Innovation is ingrained in our culture, driving us to 
+         constantly explore new ideas and technologies to improve our software and better serve our users. We value teamwork and collaboration, 
+         recognizing that our collective strength is greater than the sum of our individual efforts. Above all, we are dedicated to customer 
+         satisfaction, prioritizing the needs and experiences of our users in everything we create and deliver.</p>
+    </div>
+    
+    
+  </div>
+</div>
+{% endblock body %}

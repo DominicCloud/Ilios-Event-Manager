@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Bookmarks{% endblock title %}
+
+{% block body %}
+
+    <div class="container mx-auto py-8 px-4">
+        <h1 class="text-3xl font-bold mb-8 text-center">Your Bookmarks</h1>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Sample Bookmark Item -->
+            {% for event in liked_events %}
+                
+                <div class="card max-w-md flex flex-col mx-auto bg-white rounded-xl overflow-hidden shadow-md">
+                    <!-- Event Image -->
+
+                    {% if event.bgimg %}
+                    <div class="border-b-4 border-black">
+                        <img src="{{event.bgimg.url}}" alt="{{event.bgimg}}" class="w-full h-full">
+                    </div>
+                        {% else %}
+                        <div class="border-b-4 border-black">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-48 w-full object-cover object-center bg-gray-300">
+                                <rect width="100%" height="100%" fill="none"/>
+                                <line x1="3" y1="21" x2="21" y2="21" stroke="#ffffff" stroke-width="2"/>
+                                <line x1="3" y1="21" x2="3" y2="3" stroke="#ffffff" stroke-width="2"/>
+                                <line x1="21" y1="21" x2="21" y2="3" stroke="#ffffff" stroke-width="2"/>
+                                <line x1="12" y1="21" x2="12" y2="9" stroke="#ffffff" stroke-width="2"/>
+                                <line x1="7" y1="16" x2="17" y2="16" stroke="#ffffff" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        {% endif %}
+                
+                    <!-- Event Details -->
+                    <div class="p-4">
+                        <!-- Event Title -->
+                        <h2 class="text-xl font-semibold text-gray-800 mb-2">{{event.title}}</h2>
+                        <!-- Event Tags -->
+                        <div class="flex flex-wrap gap-2 mb-2">
+                            {% for tag in event.tags %}
+                            <span class="border border-blue-800 bg-blue-500 text-white px-2 py-1 rounded-full text-xs">{{tag}}</span>
+                            {% endfor %}
+                        </div>
+                        
+                        {% if event.expiry_timer %}
+                        <!-- Register Button -->
+                        <div class="mt-auto">
+                            <button class=" new-button bg-green-500 border-2 border-black hover:bg-red-600 hover:text-white font-bold py-2 px-4 rounded">
+                                <a href="event-registration/{{event.id}}">Register</a>
+                            </button>
+                        </div>
+                        {% else %}
+                        <!-- View Button -->
+                        <div class="mt-auto">
+                            <button class=" new-button text-black bg-violet-200 border-2 border-black hover:bg-violet-600 hover:text-white font-bold py-2 px-4 rounded">
+                                <a href="event-registration/{{event.id}}">View</a>
+                            </button>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+            {% endfor %}
+            <!-- End of Sample Bookmark Item -->
+        </div>
+    </div>
+
+{% endblock body %}
+

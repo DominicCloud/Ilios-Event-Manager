@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        /* Custom toggle styles */
+        .toggle-checkbox:checked + .toggle-label .toggle-inner {
+            transform: translateX(100%);
+            background-color: #4F46E5;
+        }
+
+        .toggle-checkbox:checked + .toggle-label .toggle-switch {
+            background-color: #FFFFFF;
+        }
+    </style>
+</head>
+
+<style>
+    .container {
+        --input-focus: #2d8cf0; /* Blue color */
+        --input-out-of-focus: #ccc; /* Gray color */
+        --bg-color: #fff;
+        --bg-color-alt: #666;
+        --main-color: #323232;
+        position: relative;
+        cursor: pointer;
+      }
+      
+      .container input {
+        position: absolute;
+        opacity: 0;
+      }
+      
+      .checkmark {
+        width: 30px;
+        height: 30px;
+        position: relative;
+        top: 0;
+        left: 0;
+        border: 2px solid var(--main-color);
+        border-radius: 5px;
+        box-shadow: 4px 4px var(--main-color);
+        background-color: var(--input-out-of-focus); /* Gray color by default */
+        transition: all 0.3s;
+      }
+      
+      .container input:checked ~ .checkmark {
+        background-color: var(--input-focus); /* Blue color when checked */
+      }
+      
+      .checkmark:after {
+        content: "";
+        width: 7px;
+        height: 15px;
+        position: absolute;
+        top: 2px;
+        left: 8px;
+        display: none; /* Initially hidden */
+        border: solid var(--bg-color);
+        border-width: 0 2.5px 2.5px 0;
+        transform: rotate(45deg);
+      }
+      
+      .container input:checked ~ .checkmark:after {
+        display: block; /* Displayed when input is checked (active state) */
+      }
+
+      .special-shadow{
+        border: 2px solid black;
+        box-shadow:6px 8px black;
+      }
+
+    .body-font{
+    font-family:Public Sans;
+    }
+
+    .alt-font{
+    font-family:Archivo;
+    }
+</style>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+{% if messages %}
+{% for message in messages %}
+<div class="fixed bottom-4 right-4">
+    <div class="bg-gray-200 border border-gray-300 rounded-lg shadow-lg p-4 text-center">
+        <h2 class="text-lg font-semibold text-gray-800 mb-2">Oops...</h2>
+        <p class="text-sm text-gray-600 mb-2">{{message}}</p>
+    </div>
+    <button id="dismissBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-2 w-full">
+        Dismiss
+    </button>
+</div>
+{% endfor %}
+{% endif %}
+    <div class="body-font special-shadow max-w-md w-full bg-white my-4 p-8 rounded-lg shadow-md">
+        <h2 class="text-2xl font-semibold mb-4">Sign up to ilios now</h2>
+        <form method="post" action="/register">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                <input type="text" id="name" name="fullname" class="mt-1 block w-full px-4 py-2 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required/>
+            </div>
+            <div class="mb-4">
+                <label for="name" class="block text-sm font-medium text-gray-700">Username</label>
+                <input type="text" id="name" name="username" class="mt-1 block w-full px-4 py-2 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required/>
+            </div>
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input type="email" id="email" name="email" class="mt-1 block w-full px-4 py-2 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+            </div>
+            <div class="mb-4">
+                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" id="password" name="pwd1" class="mt-1 block w-full px-4 py-2 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+            </div>
+            <div class="mb-4">
+                <label for="password" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                <input type="password" id="password" name="pwd2" class="mt-1 block w-full px-4 py-2 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+            </div>
+            <div class="mb-4">
+                <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                <input type="tel" id="phone" name="phone" class="mt-1 block w-full px-4 py-2 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+            </div>
+            <div class="mb-4">
+                <label for="college" class="block text-sm font-medium text-gray-700">College Name</label>
+                <input type="text" id="college" name="college" class="mt-1 block w-full px-4 py-2 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+            </div>
+
+            <!-- Toggle Button for Student/Host -->
+            <div class="flex container justify-around ">
+                <span class="block text-md font-medium text-gray-700">Are you a host?</span>
+                <label class="checkbox">
+                  <input type="checkbox" name="role">
+                  <div class="checkmark"></div>
+                </label>
+              </div>
+              
+
+            <div class="mt-4">
+                <button type="submit" class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Register</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="mx-8">
+        <p class="body-font text-lg">Already have an account? Login <a href="/login"><b>Here</b></a></p>
+    </div>
+</body>
+<script>
+    // Add functionality to the dismiss button
+    const dismissBtn = document.getElementById('dismissBtn');
+    dismissBtn.addEventListener('click', function() {
+        // Hide the message box
+        document.querySelector('.fixed').style.display = 'none';
+    });
+</script>
+</html>
+
+

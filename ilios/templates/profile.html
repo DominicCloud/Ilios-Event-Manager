@@ -1,0 +1,83 @@
+
+{% extends "base.html" %}
+{% block title %}Profile{% endblock title %}
+
+{% block body %}
+<div class="container mx-auto py-8 px-4">
+    <div class="max-w-lg mx-auto bg-white p-8 rounded-lg special-shadow">
+        
+        {% if not view_mode %}
+        <!-- Profile Picture -->
+        {% if details.profile_img %}
+        <div class="flex justify-center mb-6">
+            <img src="media/{{ details.profile_img }}" class="h-2/4 w-2/4 rounded-full p-4 border-2 border-black" alt="{{details.profile_img}}">
+        </div>
+        {% else %}
+        <div class="flex justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-2/4 w-2/4 text-gray-800 bg-gray-200 rounded-full p-4" viewBox="0 0 24 24">
+                <path fill="none" d="M0 0h24v24H0z"/>
+                <path d="M12 13c1.66 0 2.99-1.34 2.99-3S13.66 7 12 7s-3 1.34-3 3 1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V20c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-1.5c0-2.33-4.67-3.5-7-3.5z"/>
+            </svg>
+        </div>
+        {% endif %}
+        {% endif %}
+        
+        
+        
+        <!-- Username -->
+        <h1 class="text-2xl font-semibold text-center text-gray-800 mb-2"><b>{{profile.user.first_name}} {{profile.user.last_name}}</b></h1>
+
+        {% if profile.isHost %}
+        <h6 class="text-2xl font-semibold text-center text-gray-800 mb-2">College Host</h6>
+        {% endif %}
+        
+        <!-- Institute -->
+        <p class="text-center text-gray-600 mb-4">Institute: {{profile.college}}</p>
+        
+        <!-- Phone Number -->
+        <p class="text-center text-gray-600">Phone Number: + {{profile.phone}}</p>
+        <br>
+        {% if reg_events %}
+        <h6 class="text-xl font-semibold text-center text-gray-800 mb-2">Registered Events</h6>
+        <div class="text-center text-gray-400 font-bold mb-4">
+            <ul>
+                {% for event in reg_events %}
+                {% if event.event.expiry_timer %}
+                <li class="text-green-600"><a href="/event-ticket/{{event.event.id}}">{{ event.event.title }}</a></li>
+                {% else %}
+                <li><a href="/event-ratings/{{event.event.id}}">{{ event.event.title }}</a></li>
+                {% endif %}
+                    
+                {% endfor %}
+            </ul>
+        </div>
+        <hr>
+        {% endif %}
+
+        {% if not view_mode %}
+            {% if details %}
+            <p class="text-center text-gray-600">Class: {{details.college_class}}</p>
+            <p class="text-center text-gray-600">Branch: {{details.branch}}</p>
+            <p class="text-center text-gray-600">Roll Number: {{details.roll_no}}</p>
+            <p class="text-center text-gray-600">PID/UID Number: {{details.pid}}</p>
+            <p class="text-center text-gray-600">Interests: 
+                {% for x in details.interests %} {{x}} |{% endfor %}
+            </p>
+            <div class="flex justify-center mb-4">
+                <button class="fancy_button bg-violet-200 mt-4 hover:bg-violet-600">                      
+                <a href="profile/edit/{{profile}}">Edit Details</a>
+                </button>
+            </div>
+            {% else %}
+            <div class="flex justify-center mb-4">
+                <button class="fancy_button bg-violet-200 mt-4 hover:bg-violet-600">                      
+                <a href="profile/edit/{{profile}}">Add Details</a>
+                </button>
+            </div>
+            {% endif %}
+        {% endif %}
+        
+        
+    </div>
+</div>
+{% endblock body %}

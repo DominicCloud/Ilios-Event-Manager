@@ -1,0 +1,320 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ilios | {% block title %}{% endblock title %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/d655f1934b.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<style>
+  {% block style %}{% endblock style %}
+    .fancy_button {
+        --font-color: #323232;
+        --bg-color: #fff;
+        --main-color: #323232;
+        width: 120px;
+        height: 40px;
+        border-radius: 5px;
+        border: 2px solid var(--main-color);
+        background-color: var(--bg-color);
+        box-shadow: 4px 4px var(--main-color);
+        font-size: 17px;
+        font-weight: 600;
+        color: var(--font-color);
+        cursor: pointer;
+      }
+      
+      .fancy_button:active {
+        box-shadow: 0px 0px var(--main-color);
+        transform: translate(3px, 3px);
+      }
+
+      .fancy_button:hover {
+        --bg-color-hover: #007bff; /* Blue color for hover state */
+        --font-color-hover: #fff; /* White color for text in hover state */
+        background-color: var(--bg-color-hover);
+        color: var(--font-color-hover); /* Set text color to white */
+    }
+    
+    /* inspired form gumroad website */
+.new-button {
+  --bg: #000;
+  --hover-bg: #8DECB4;
+  --hover-text: #000;
+  color: #fff;
+  cursor: pointer;
+  border: 1px solid var(--bg);
+  border-radius: 4px;
+  padding: 0.8em 2em;
+  background: var(--bg);
+  transition: 0.2s;
+}
+
+.new-button:hover {
+  color: var(--hover-text);
+  font-style: bold;
+  transform: translate(-0.25rem, -0.25rem);
+  background: var(--hover-bg);
+  box-shadow: 0.25rem 0.25rem var(--bg);
+}
+
+.new-button:active {
+  transform: translate(0);
+  box-shadow: none;
+}
+
+.card {
+    width: 350px;
+    background: #ff;
+    border-radius: 1rem;
+    border: 0.5vmin solid #05060f;
+    box-shadow: 0.4rem 0.4rem #05060f;
+    overflow: hidden;
+    color: black;
+    
+  }
+
+  .Btn {
+    --black: #000000;
+    --ch-black: #141414;
+    --eer-black: #1b1b1b;
+    --night-rider: #2e2e2e;
+    --white: #ffffff;
+    --af-white: #f3f3f3;
+    --ch-white: #e1e1e1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition-duration: .3s;
+    border: 2px solid black;
+    box-shadow: 6px 6px #000000;
+    background-color: var(--af-white);
+  }
+  
+  /* plus sign */
+  .sign {
+    width: 100%;
+    transition-duration: .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .sign svg {
+    width: 17px;
+  }
+  
+  .sign svg path {
+    fill: var(--night-rider);
+  }
+  /* text */
+  .text {
+    position: absolute;
+    right: 0%;
+    width: 0%;
+    opacity: 0;
+    color: var(--night-rider);
+    font-size: 1.2em;
+    font-weight: 600;
+    transition-duration: .3s;
+  }
+  /* hover effect on button width */
+  .Btn:hover {
+    width: 125px;
+    border-radius: 5px;
+    transition-duration: .3s;
+  }
+  
+  .Btn:hover .sign {
+    width: 30%;
+    transition-duration: .3s;
+    padding-left: 20px;
+  }
+  /* hover effect button's text */
+  .Btn:hover .text {
+    opacity: 1;
+    width: 70%;
+    transition-duration: .3s;
+    padding-right: 10px;
+  }
+  /* button click effect*/
+  .Btn:active {
+    transform: translate(2px ,2px);
+  }
+
+  .nav-link {
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -2px; /* Adjust the distance from the text */
+      width: 0;
+      height: 2px; /* Adjust the thickness of the underline */
+      background-color: #000; /* Adjust the color of the underline */
+      transition: width 0.3s; /* Adjust the duration of the underline animation */
+    }
+
+    .nav-link:hover::before {
+      width: 100%;
+    }
+
+    .special-shadow{
+      border: 2px solid black;
+      box-shadow:6px 8px black;
+      border-radius:8px;
+      overflow: hidden;
+    }
+
+    .body-font{
+      font-family:Public Sans;
+    }
+
+    .alt-font{
+      font-family:Archivo;
+    }
+
+</style>
+
+<body class="bg-white body-font">
+    
+{% if messages %}
+{% for message in messages %}
+<div class="fixed bottom-4 right-4">
+    <div class="border-2 border-black bg-gray-200 rounded-lg shadow-lg p-4 text-center">
+        <h2 class="text-lg font-semibold text-gray-800 mb-2">Hey There</h2>
+        <p class="text-sm text-gray-600 mb-2">{{message}}</p>
+    </div>
+    <button id="dismissBtn" class="border-2 border-black bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-2 w-full">
+        Dismiss
+    </button>
+</div>
+{% endfor %}
+{% endif %}
+
+    <nav class="bg-orange-100 border-b-4 border-black py-4 text-orange-950">
+        <div class="container mx-auto px-4">
+          <div class="flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center text-lg font-bold">
+              <img src="{% static "icons/logo.png" %}" class="w-12 h-13" alt="ilios logo">
+              <p class="mx-2 text-4xl">ilios</p>
+            </div>
+            <!-- Navigation Links -->
+            <ul class="flex space-x-4 items-center text-lg">
+              <li><a href="/" class="nav-link">Home</a></li>
+              <li><a href="/events" class="nav-link">Events</a></li>
+              <li><a href="/about" class="nav-link">About</a></li>
+              <li><a href="/bookmarks" class="nav-link">Bookmarks</a></li>
+              {% if profile.isHost %}
+              <li><a href="/create" class="nav-link">Create</a></li>
+              <li><a href="/dashboard" class="nav-link">Dashboard</a></li>
+              {% endif %}
+              <li><a href="/profile" class="nav-link">Profile</a></li>
+              <li>
+                <button class="Btn">
+                  <div class="sign">
+                    <svg viewBox="0 0 512 512">
+                      <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z">
+                      </path>
+                  </svg>
+                </div>
+                  <div class="text">
+                    <a href="/logout" class="hover:text-black text-lg">Logout</a>
+                  </div>
+                </button></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    
+
+{% block body %}{% endblock body %}
+</body>
+
+<footer>
+    <div class="p-10 mt-28 bg-orange-100 text-black border-t-4 border-black w-full">
+        <div class=" mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+                <div class="mb-5 flex items-start ">
+                  <div  class ="mx-4">
+                    <img src="{% static "icons/logo.png" %}" class ="w-full h-auto" alt="logo">
+                  </div>
+                  <div class="mx-2">
+                    <h4><b>ilios</b></h4>
+                    <p class="text-gray-500 font-bold">
+                      A1 Street <br> Las Vegas USA <br>
+                      9696969696 <br> ilios.incorporated@gmail.com <br>
+                      </p>
+                  </div>
+                  
+                  
+                  
+                  </div>
+                <div class="mb-5 px-8"> 
+                  <h4><b>Pages</b></h4>
+                    <ul>
+                        <li class="pb-2"><i class="fa fa-chevron-right mr-2"></i><a href="/" class="hover:text-teal-500">Home</a></li>
+                        <li class="pb-2"><i class="fa fa-chevron-right mr-2"></i><a href="/events" class="hover:text-teal-500">Events</a></li>
+                        <li class="pb-2"><i class="fa fa-chevron-right mr-2"></i><a href="/about" class="hover:text-teal-500">About</a></li>
+                        <li class="pb-2"><i class="fa fa-chevron-right mr-2"></i><a href="/bookmarks" class="hover:text-teal-500">Bookmarks</a></li>
+                    </ul>
+                    
+                </div>
+                <div class="mb-5"> 
+                    <h4> <b>Socials</b></h4>
+                    <ul>
+                        <li class="pb-2"><i class="fa-brands fa-square-instagram mr-2"></i> Instagram</li>
+                        <li class="pb-2"><i class="fa-brands fa-whatsapp mr-2"></i> Whatsapp</li>
+                        <li class="pb-2"><i class="fa-brands fa-x-twitter mr-2"></i> X</li>
+                        <li class="pb-2"><i class="fa-brands fa-telegram mr-2"></i> Telegram</li>
+                        <li class="pb-2"><i class="fa-brands fa-facebook mr-2"></i> Facebook</li>
+                        <li class="pb-2"><i class="fa-brands fa-linkedin mr-2"></i> LinkedIn</li>
+                    </ul>
+                </div>
+               
+  
+  
+  
+            </div>
+        </div>
+    </div>
+    <div class="w-full bg-gray-900 text-gray-400 px-10">
+        <div>
+            <div class="text-center">
+                <div>
+                    <i class="fa-regular fa-copyright"></i> <span class="text-bold">Ilios</span>. All rights reserved
+                </div>
+                
+            </div>
+        </div>
+    </div>
+  </footer>
+
+
+<script>
+    // Add functionality to the dismiss button
+    const dismissBtn = document.getElementById('dismissBtn');
+    dismissBtn.addEventListener('click', function() {
+        // Hide the message box
+        document.querySelector('.fixed').style.display = 'none';
+    });
+    {% block script %}{% endblock script %}
+</script>
+</html>

@@ -1,0 +1,76 @@
+{% extends "base2.html" %}
+
+{% block title %}User Profile{% endblock title %}
+
+{% block body %}
+    <div class="container mx-auto py-8 px-4 ">
+        <div class="special-shadow max-w-lg mx-auto bg-white p-8 rounded-lg shadow-md">
+            <!-- Profile Picture -->
+        {% if details.profile_img %}
+        <div class="flex justify-center mb-6">
+            <img src="{{ details.profile_img.url }}" class="h-2/4 w-2/4 rounded-full p-4 border-2 border-black" alt="{{details.profile_img}}">
+        </div>
+        {% else %}
+        <div class="flex justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 text-gray-800 bg-gray-200 rounded-full p-4" viewBox="0 0 24 24">
+                <path fill="none" d="M0 0h24v24H0z"/>
+                <path d="M12 13c1.66 0 2.99-1.34 2.99-3S13.66 7 12 7s-3 1.34-3 3 1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V20c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-1.5c0-2.33-4.67-3.5-7-3.5z"/>
+            </svg>
+        </div>
+        {% endif %}
+            
+            
+            <!-- Username -->
+            <h1 class="text-2xl font-semibold text-center text-gray-800 mb-2"><b>{{profile.user.first_name}} {{profile.user.last_name}}</b></h1>
+    
+            {% if profile.isHost %}
+            <h6 class="text-2xl font-semibold text-center text-gray-800 mb-2">College Host</h6>
+            {% endif %}
+            
+            <!-- Institute -->
+            <p class="text-center text-gray-600 mb-4">Institute: {{profile.college}}</p>
+            
+            <!-- Phone Number -->
+            <p class="text-center text-gray-600">Phone Number: + {{profile.phone}}</p>
+    
+            <!-- Form for Additional Details -->
+            <form action="/profile" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="class" class="block text-sm font-semibold text-gray-600">Class</label>
+                    <input type="text" id="class" name="col_class" value="{{details.college_class}}" class="block w-full px-4 py-2 mt-1 text-sm rounded-md border-gray-300 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-500" placeholder="Enter your class" required>
+                </div>
+                <div class="mb-4">
+                    <label for="roll_number" class="block text-sm font-semibold text-gray-600">Roll Number</label>
+                    <input type="text" id="roll_number" name="roll_number" value="{{details.roll_no}}" class="block w-full px-4 py-2 mt-1 text-sm rounded-md border-gray-300 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-500" placeholder="Enter your roll number" required>
+                </div>
+                <div class="mb-4">
+                    <label for="branch" class="block text-sm font-semibold text-gray-600">Branch</label>
+                    <input type="text" id="branch" name="branch" value="{{details.branch}}" class="block w-full px-4 py-2 mt-1 text-sm rounded-md border-gray-300 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-500" placeholder="Enter your branch" required>
+                </div>
+                <div class="mb-4">
+                    <label for="pid_uid" class="block text-sm font-semibold text-gray-600">PID/UID Number</label>
+                    <input type="text" id="pid_uid" name="pid_uid" value="{{details.pid}}" class="block w-full px-4 py-2 mt-1 text-sm rounded-md border-gray-300 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-500" placeholder="Enter your PID/UID number" required>
+                </div>
+                <div class="mb-4">
+                    <label for="interests" class="block text-sm font-semibold text-gray-600">Interests</label>
+                    <textarea id="interests" name="interests" class="block w-full px-4 py-2 mt-1 text-sm rounded-md border-gray-300 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-500" placeholder="Enter your interests" required></textarea>
+                </div>
+    
+                <div class="relative">
+                    <label for="profile_img" class="fancy_button bg-blue-200 hover:bg-blue-700 hover:text-white font-bold py-2 px-4 rounded cursor-pointer">
+                      Upload an Image
+                    </label>
+                    <input id="profile_img" name="profile_img" type="file" class="hidden" />
+                  </div>
+                  
+                <div class="flex justify-center mt-8">
+                    <button class="new-button hover:bg-violet-200 hover:text-black">
+                        Save Details
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock body %}

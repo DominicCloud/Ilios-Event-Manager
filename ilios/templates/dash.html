@@ -1,0 +1,98 @@
+{% extends "base2.html" %}
+{% block style %}
+    .card-container {
+        display: flex;
+        justify-content: space-between;
+        transition: all 0.3s ease-in-out;
+        padding: 10px;
+        margin-bottom: 20px; /* Reduce space between rows */
+        height: auto; /* Set height to auto */
+    }
+
+    .card-container:hover .card {
+        flex: 1;
+    }
+
+    .card-container:hover .card:hover {
+        flex: 3;
+    }
+
+    .card {
+        flex: 1;
+        padding: 20px;
+        border: 3px solid black;
+        border-radius: 8px;
+        text-align: center;
+        transition: flex 0.3s ease-in-out;
+        cursor: pointer;
+        margin-right: 10px; /* Added margin */
+        position: relative;
+        height: 150px; /* Set a fixed height */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Remove margin from last card to avoid extra space */
+    .card:last-child {
+        margin-right: 0;
+    }
+
+    /* Hide text by default */
+    .card span {
+        visibility: hidden;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    /* Reveal text on hover */
+    .card:hover span {
+        visibility: visible;
+    }
+{% endblock style %}
+{% block body %}
+<div class="flex justify-center items-center h-screen">
+    <div class="container">
+        <div class="card-container w-3/4">
+            <!-- Card 1: Home -->
+            <div class="card hover:bg-red-100">
+                <span class="text-4xl"><a href="/">Home</a></span>
+            </div>
+
+            <!-- Card 2: Profile -->
+            <div class="card hover:bg-yellow-100">
+                <span class="text-4xl"><a href="/profile">Profile</a></span>
+            </div>
+
+            <!-- Card 3: Events -->
+            <div class="card hover:bg-pink-100">
+                <span class="text-4xl"><a href="/events">Events</a></span>
+            </div>
+        </div>
+        <div class="card-container w-3/4">
+            <!-- Card 1: View Liked Events -->
+            <div class="card hover:bg-blue-100">
+                <span class="text-4xl"><a href="dashboard/liked">View Liked Events</a></span>
+            </div>
+
+            <!-- Card 2: View Registered Entries -->
+            <div class="card hover:bg-green-100">
+                <span class="text-4xl"><a href="dashboard/registered">View Registered Events</a></span>
+            </div>
+
+            <!-- Card 3: Analytics -->
+            <div class="card hover:bg-purple-100">
+                <span class="text-4xl"><a href="dashboard/analytics">Analytics</a></span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
+    
+</head>
+<body class="bg-gray-100">
+    
+</body>
+</html>

@@ -1,0 +1,100 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+{% block body %}
+<main class="container mx-auto mt-8">
+    <section class="flex rounded-lg py-8">
+      <div class="flex flex-col justify-center items-center">
+          <h2 class="text-4xl font-bold mb-4">Welcome to <t class="alt-font">ilios</t>
+          {% if request.user.is_authenticated %}
+          , {{request.user}}
+          {% else %}
+          , stranger
+          {% endif %}
+          </h2>
+          <p class="text-lg text-gray-700 mb-4">Your go-to platform for managing college events.</p>
+          <p class="text-lg text-gray-700 text-center mb-8">Ilios helps you streamline event planning, promotion, and ticketing, making it easier than ever to organize successful events on your campus.</p>
+          <button class="new-button justify-self-end">
+            <a href='/events'>Let's Go →</a>
+        </button>
+      </div>
+        
+        <div class="w-82 h-82">
+          <img src="{% static "stock/hero.png"%}" alt="hero section image">
+        </div>
+    </section>
+    <!-- Solar System SVG -->
+    
+    
+    <section class="mt-12 justify-between sm:grid grid-cols-3 gap-8 t w-full ">
+
+        <div class="mb-8 border-2 rounded-lg border-black text-center text-lg items-center bg-purple-900 text-white sm:h-96 align-center sm:bg-white sm:hover:bg-orange-100 sm:text-black flex hover:shadow-2xl ">
+            <div class="m-auto">
+                <span class="font-medium text-xl">Seamless Event Discovery</span> <br><br>
+                <p>Effortlessly find and access a wide range of college events, workshops, and seminars through intuitive search and browsing functionalities.</p>
+            </div>
+        </div>
+
+        <div class="mb-8 border-2 rounded-lg border-black text-center text-lg items-center bg-purple-900 text-white sm:h-96 align-center sm:bg-white sm:hover:bg-orange-100 sm:text-black flex hover:shadow-2xl">
+            <div class="m-auto">
+                <span class="font-medium text-xl">Social Integration and Sharing</span> <br><br>
+                <p>Share and promote college events with friends and followers on social media platforms, fostering community engagement and increasing event visibility.</p>
+            </div>
+        </div>
+        
+        <div class="mb-8 border-2 rounded-lg border-black text-center text-lg items-center bg-purple-900 text-white sm:h-96 align-center sm:bg-white sm:hover:bg-orange-100 sm:text-black flex hover:shadow-lg">
+            <div class="m-auto">
+                <span class="font-medium text-xl">Feedback and Ratings System</span> <br><br>
+                <p>Provide valuable feedback and ratings on event experiences, empowering event organizers to improve future events and helping users make informed decisions.</p>
+            </div>
+        </div>
+        
+    </section>
+
+    <hr>
+    <!--Sections-->
+    <section class="">
+      <!-- Section 1 -->
+      <div class="flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 md:pr-4">
+          <h2 class="text-4xl font-bold mb-2">Register with a single click</h2>
+          <p class="text-gray-700 leading-relaxed">A seamless and effortless registration process.
+            Swiftly sign up without the hassle of filling out
+            lengthy forms or providing excessive
+            information.
+            This streamlines the user experience, making it
+            quick and convenient to join and access the
+            benefits of the platform
+             </p>
+        </div>
+        <div class="md:w-1/2 mt-4 md:mt-0">
+          <img src="{% static "stock/landing_page_1.png" %}" alt="Our Story" class="w-full h-auto rounded-lg">
+        </div>
+      </div>
+      
+      <!-- Section 2 -->
+      <div class="flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 mt-4 md:mt-0">
+          <img src="{% static "stock/lp2.png" %}" alt="Our Story" class="w-full h-auto rounded-lg">
+        </div>
+        <div class="md:w-1/2 md:pr-4">
+          <h2 class="text-4xl font-bold mb-2">Analysis at a Glance</h2>
+          <p class="text-gray-700 leading-relaxed">Experience lightning-fast analysis tailored for
+            your convenience! Our website offers quick
+            and intuitive data analysis tools that prioritize
+            user-friendliness. With just a few clicks, gain
+            valuable insights without the wait.
+            Say goodbye to complex processes and hello
+            to streamlined efficiency. Empower your
+            decision-making with our rapid analysis
+            feature and stay ahead of the curve!
+            
+             </p>
+        </div>
+        
+      </div>
+    </section>
+
+</main>
+{% endblock body %}

@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Events{% endblock title %}
+
+{% block body %}
+<div class="flex flex-wrap justify-around gap-4 p-4">
+  {% for event in events%}
+  <div class="card m-1 flex flex-col">
+    <!-- Event Title with Background Color -->
+    {% if event.expiry_timer > 24 %}
+    <div class="bg-green-400">
+      <h2 class="text-xl text-white font-bold p-2">{{event.title}}</h2>
+  </div>
+    {% elif event.expiry_timer < 24 and event.expiry_timer != 0 %}
+    <div class="bg-yellow-400">
+      <h2 class="text-xl text-white font-bold p-2">{{event.title}}</h2>
+  </div>
+    {% else %}
+    <div class="bg-red-400">
+      <h2 class="text-xl text-white font-bold p-2">{{event.title}}</h2>
+  </div>
+    {% endif %}
+    
+
+    {% if event.bgimg %}
+      <div class="border-b-4 border-black">
+        <img src="{{event.bgimg.url}}" alt="{{event.bgimg}}" class="w-full h-auto">
+      </div>
+    {% else %}
+      <div class="border-b-4 border-black">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-48 w-full object-cover object-center bg-gray-300">
+          <rect width="100%" height="100%" fill="none"/>
+          <line x1="3" y1="21" x2="21" y2="21" stroke="#ffffff" stroke-width="2"/>
+          <line x1="3" y1="21" x2="3" y2="3" stroke="#ffffff" stroke-width="2"/>
+          <line x1="21" y1="21" x2="21" y2="3" stroke="#ffffff" stroke-width="2"/>
+          <line x1="12" y1="21" x2="12" y2="9" stroke="#ffffff" stroke-width="2"/>
+          <line x1="7" y1="16" x2="17" y2="16" stroke="#ffffff" stroke-width="2"/>
+        </svg>
+      </div>
+    {% endif %}
+    
+
+    <div class="p-2">
+        <p class="text-gray-700 mb-2 text-sm">{{event.description}}</p>
+        <div class="flex px-1 mb-2">
+            <img src="{%static 'icons/loc.png' %}" class="h-10 w-10" alt="icon">
+            <p class="text-gray-700 mb-2 px-2"><b>{{event.creator.college}}</b></p>
+        </div>
+        <div class="flex px-2 mb-2">
+          <img src="{%static 'icons/hours.png' %}" class="h-8 w-8" alt="icon">
+          <p class="text-gray-700 mb-2 px-2"><b>{{event.event_duration}} hour event</b></p>
+        </div>
+        <div class="flex px-2 mb-2">
+            <img src="{%static 'icons/time.png' %}" class="h-8 w-8" alt="icon">
+            <p class="text-gray-700 mb-2 px-2"><i>{{event.event_date}}</i></p>
+        </div>
+        
+        <!-- Event Tags -->
+        <div class="flex flex-wrap gap-2 mb-2">
+          {% for tag in event.tags %}
+          <span class="border-2 border-blue-800 bg-blue-500 text-white px-2 py-1 rounded-full text-xs">{{tag}}</span>
+          {% endfor %}
+        </div>
+
+        <!-- Like and Auto-register Buttons -->
+        <div class="flex gap-2 m-2 justify-around">
+            <button class="bg-white text-gray-800 font-semibold py-2 px-4 rounded-full flex items-center border-2 border-black hover:bg-black hover:text-white hover:border-transparent transition-all duration-300 ease-in-out">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5 mr-1 fill-current text-red-500">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+                <a href="/events/liked/{{event.id}}">Like</a>
+            </button>
+            {% if event.expiry_timer != 0 %}
+            <button class="bg-indigo-200 text-black border-2 border-black hover:bg-blue-700 hover:text-white font-bold py-2 px-4 rounded">
+              <a href="/auto-register-redirect/{{event.id}}">Auto-register</a>
+            </button>
+            {% endif %}
+        </div>
+    
+    </div>
+    
+</div>
+  {% endfor %}
+  
+
+
+</div>
+{% endblock body %}
+

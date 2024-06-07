@@ -1,0 +1,53 @@
+{% extends "base2.html" %}
+{% block title %}Liked Events{% endblock title %}
+{% block body %}
+<div class="container mx-auto py-8">
+    <h1 class="text-3xl font-bold mb-8">Liked Events</h1>
+    {% for x in events %}
+    <div class="special-shadow bg-white p-6 mb-8">
+        <h2 class="text-xl font-semibold mb-2"> {{x}} </h2>
+        <!-- List of Users Who Liked the Post -->
+        {% for data in liked_data %}
+        {% for tuple in data %}
+        <ul>
+            {% if tuple.event == x %}
+            <li class="flex items-center justify-between border-b py-2">
+                <div class="flex items-center">
+                    {% comment %} <img src="user1.jpg" alt="User 1" class="w-8 h-8 rounded-full mr-2"> {% endcomment %}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-2 text-gray-800 bg-gray-200 rounded-full p-1" viewBox="0 0 16 16">
+                        <path fill="none" d="M0 0h16v16H0z"/>
+                        <path d="M8 7c1.33 0 2.41-1.08 2.41-2.41C10.41 3.26 9.33 2.17 8 2.17S5.59 3.26 5.59 4.59C5.59 5.92 6.67 7 8 7zm0 1c-1.96 0-5 1-5 3.5V15h10v-3.5c0-2.5-3.04-3.5-5-3.5z"/>
+                    </svg>
+                    <button class="bg-blue-500 ml-2 mr-2 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        <a href="/profile/{{tuple.user_profile}}">View User Profile</a>
+                    </button>
+                    <span>{{tuple.user_profile.user.first_name}} {{tuple.user_profile.user.last_name}} liked this event</span>
+                    
+                </div>
+                <span class="text-gray-500">{{tuple.timestamp}}</span>
+            </li>
+            {% endif %}
+
+        </ul>
+        {% endfor %}
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock body %}
+
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+    
+</body>
+
+</html> {% endcomment %}

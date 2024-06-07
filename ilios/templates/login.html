@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        /* Custom toggle styles */
+        .toggle-checkbox:checked + .toggle-label .toggle-inner {
+            transform: translateX(100%);
+            background-color: #4F46E5;
+        }
+
+        .toggle-checkbox:checked + .toggle-label .toggle-switch {
+            background-color: #FFFFFF;
+        }
+
+        .special-shadow{
+            border: 2px solid black;
+            box-shadow:6px 8px black;
+          }
+
+        .body-font{
+        font-family:Public Sans;
+        }
+    
+        .alt-font{
+        font-family:Archivo;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center">
+{% if messages %}
+{% for message in messages %}
+<div class="fixed bottom-4 right-4">
+    <div class="bg-gray-200 border border-gray-300 rounded-lg shadow-lg p-4 text-center">
+        <h2 class="text-lg font-semibold text-gray-800 mb-2">Oops</h2>
+        <p class="text-sm text-gray-600 mb-2">{{message}}</p>
+    </div>
+    <button id="dismissBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-2 w-full">
+        Dismiss
+    </button>
+</div>
+{% endfor %}
+{% endif %}
+    <div class="body-font special-shadow max-w-md w-full bg-white p-8 rounded-lg shadow-md">
+        <h2 class="text-2xl font-semibold mb-4">Login to stay up to date</h2>
+        <form method="post" action="/login">
+            {% csrf_token %}
+            
+            <div class="mb-4">
+                <label for="name" class="block text-sm font-medium text-gray-700">Username</label>
+                <input type="text" id="name" name="username" class="mt-1 block w-full px-4 py-2 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"/>
+            </div>
+            
+            <div class="mb-4">
+                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" id="password" name="pwd1" class="mt-1 block w-full px-4 py-2 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+            </div>
+           
+            <div class="mt-4">
+                <button type="submit" class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Login</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="mt-16">
+        <p class="body-font text-lg">New User? Register <a href="/register"><b>Here</b></a></p>
+    </div>
+
+</body>
+<script>
+    // Add functionality to the dismiss button
+    const dismissBtn = document.getElementById('dismissBtn');
+    dismissBtn.addEventListener('click', function() {
+        // Hide the message box
+        document.querySelector('.fixed').style.display = 'none';
+    });
+</script>
+</html>
+
+
