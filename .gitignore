@@ -6,3 +6,9 @@ crash.log
 
 # For built boxes
 *.box
+
+# Project pycache
+ilios/ilios/__pycache__
+
+# Environment Variables
+.env

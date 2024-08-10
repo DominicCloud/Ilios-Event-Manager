@@ -1,9 +1,18 @@
 from pathlib import Path
 import os
+import environ
+from dotenv import load_dotenv
+load_dotenv()
+
+
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-u0qj5@681va(iehhm2zgd-$uv)^wx@f2$j&jq9!%-hr17)h+qw'
+#SECRET_KEY = 'django-insecure-u0qj5@681va(iehhm2zgd-$uv)^wx@f2$j&jq9!%-hr17)h+qw'
+SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 DEBUG = True
 
@@ -119,8 +128,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Email Details
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'ilios.incorporated@gmail.com'
-EMAIL_HOST_PASSWORD = 'asdj lsyk tkvg djko'
+# EMAIL_HOST_USER = 'ilios.incorporated@gmail.com'
+# EMAIL_HOST_PASSWORD = 'asdj lsyk tkvg djko'
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'ilios.incorporated@gmail.com'
+DEFAULT_FROM_EMAIL = env('EMAIL_HOST_USER')
